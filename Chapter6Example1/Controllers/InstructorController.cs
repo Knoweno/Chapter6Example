@@ -23,6 +23,13 @@ namespace Chapter6Example1.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> AddInstructor(Instructor instructor)
+        {
+            db.Add(instructor);
+            await db.SaveChangesAsync();
+            return RedirectToAction("AllInstructor");
+        }
     }
 }
 
