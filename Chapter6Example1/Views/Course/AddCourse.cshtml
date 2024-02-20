@@ -1,1 +1,20 @@
-﻿@model Chapter6Example1.Models.CourseAddCourseViewModel
+﻿@model Chapter6Example1.ViewModels.CourseAddCourseViewModel
+
+
+<form asp-controller="Course" asp-action="AddCourse"
+      method="post">
+    <label asp-for="Course.CourseTitle"></label>
+    <input asp-for="Course.CourseTitle" />
+    <br />
+    <label asp-for="Course.seatCapacity"></label>
+    <input asp-for="Course.seatCapacity" />
+    <br />
+
+    <label asp-for="Instructor.InstructorName"></label>
+    <select asp-for="Instructor.InstructorId" 
+        asp-items="@Model.InstructorList"></select>
+  
+    <br />
+
+    <button type="submit"> Add Course </button>
+</form>
