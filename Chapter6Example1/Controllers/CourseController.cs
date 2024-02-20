@@ -1,8 +1,7 @@
 ﻿using Chapter6Example1.Models;
+using Chapter6Example1.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Chapter6Example1.Controllers
@@ -20,5 +19,15 @@ namespace Chapter6Example1.Controllers
             var courrse = await db.Courses.Include(c=>c.Instructor).ToListAsync();
             return View(courrse);
         }
+
+        public async Task<IActionResult> AddCourse()
+        {
+            var instructorDisplay = await db.Instructors.Select(
+                x => new { Id = x.InstructorId, value = x.InstructorName }).ToListAsync();
+            CourseAddCourseViewModel vm = new CourseAddCourseViewModel();
+            vm.InstructorList = new SelectList(instructorDisplay, "Id", "valie");
+            return View(vm);
+        }
+
     }
 }

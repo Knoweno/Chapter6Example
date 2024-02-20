@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Chapter6Example1.Models.Course>
+
+<p> <a asp-action="AddInstructor">Add Course</a> </p>
+
+@{
+    if (Model.Count() < 1)
+    {
+        <p>No course in database yet.</p>
+    }
+    else
+    {
+        <h3>All Courses</h3>
+        <table border="1">
+            <tr>
+                <th>Course ID</th>
+                <th>Course Title</th>
+                <th>Seat Capacity</th>
+                <th>Instructor Name</th>
+            </tr>
+            @foreach (var course in Model)
+            {
+                <tr>
+                    <td>@course.CourseID</td>
+                    <td>@course.CourseTitle</td>
+                    <td>@course.seatCapacity</td>
+                    <td>@course.Instructor.InstructorName</td>
+                </tr>
+            }
+        </table>
+    }
+}
