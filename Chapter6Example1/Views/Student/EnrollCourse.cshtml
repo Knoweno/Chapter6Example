@@ -1,0 +1,34 @@
+﻿@model Chapter6Example1.Models.Enrollment
+<p>Enter Student ID to Register this course</p>
+<h3> Course Information</h3>
+<table border="1">
+    <tr>
+        <th>Course ID</th>
+        <th>Course Title</th>
+        <th>Remaining Seats</th>
+    </tr>
+    <tr>
+        <td>@ViewBag.course.CourseID</td>
+        <td>@ViewBag.course.CourseTitle</td>
+        <td>@ViewBag.course.seatCapacity</td>
+    </tr>
+</table>
+@{
+    if (ViewBag.Course.seatCapacity <1)
+    {
+        <p>This course is sull. Try a different time.</p>
+        <p><a asp-controller="Course" asp-action="AllCourse">
+                Back to Course List</a></p>
+    }
+    else
+    {
+        <form asp-controller="Student"
+        asp-action="EnrollCourse" method="post">
+        <label asp-for="StudentId"></label>
+        <br/>
+            <input asp-for="CourseId" type="hidden"
+                       value="@ViewBag.course.CourseID" />
+            <button type="submit">Register Course</button>
+        </form>
+    }
+}

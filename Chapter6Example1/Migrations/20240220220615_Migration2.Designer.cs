@@ -3,6 +3,7 @@ using Chapter6Example1.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chapter6Example1.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240220220615_Migration2")]
+    partial class Migration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,29 +49,6 @@ namespace Chapter6Example1.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("Chapter6Example1.Models.Enrollment", b =>
-                {
-                    b.Property<int>("EnrollementId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EnrollementId"));
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EnrollementId");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Enrollments");
-                });
-
             modelBuilder.Entity("Chapter6Example1.Models.Instructor", b =>
                 {
                     b.Property<int>("InstructorId")
@@ -98,23 +78,6 @@ namespace Chapter6Example1.Migrations
                     b.ToTable("Instructors");
                 });
 
-            modelBuilder.Entity("Chapter6Example1.Models.Student", b =>
-                {
-                    b.Property<int>("StudentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"));
-
-                    b.Property<string>("StudentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("StudentId");
-
-                    b.ToTable("Students");
-                });
-
             modelBuilder.Entity("Chapter6Example1.Models.Course", b =>
                 {
                     b.HasOne("Chapter6Example1.Models.Instructor", "Instructor")
@@ -126,38 +89,9 @@ namespace Chapter6Example1.Migrations
                     b.Navigation("Instructor");
                 });
 
-            modelBuilder.Entity("Chapter6Example1.Models.Enrollment", b =>
-                {
-                    b.HasOne("Chapter6Example1.Models.Course", "Course")
-                        .WithMany("Enrollments")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Chapter6Example1.Models.Student", "Student")
-                        .WithMany("Enrollments")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("Chapter6Example1.Models.Course", b =>
-                {
-                    b.Navigation("Enrollments");
-                });
-
             modelBuilder.Entity("Chapter6Example1.Models.Instructor", b =>
                 {
                     b.Navigation("Courses");
-                });
-
-            modelBuilder.Entity("Chapter6Example1.Models.Student", b =>
-                {
-                    b.Navigation("Enrollments");
                 });
 #pragma warning restore 612, 618
         }

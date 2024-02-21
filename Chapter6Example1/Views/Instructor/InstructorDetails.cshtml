@@ -1,0 +1,21 @@
+﻿@model Chapter6Example1.Models.Instructor
+<h2>@Model.InstructorName</h2>
+<table border="1">
+    <tr>
+        <th>Instructor ID</th>
+        <td>@Model.InstructorId</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <th>Phone</th>
+        <td>@Model.Phone</td>
+    </tr>
+    <tr>
+        <th>Office</th>
+        <td>@Model.Office</td>
+    </tr>
+</table>
+<p> <a  asp-controller="Course" asp-action="AllCourse"> Back to course list</a></p>

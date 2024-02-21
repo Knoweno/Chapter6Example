@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Chapter6Example1.Models.Student>
+<h2>@ViewData["Course"]</h2>
+@{
+    if(Model.Count() < 1)
+    {
+        <p> No student registered for this course yet.</p>
+    }
+    else
+    {
+        <h3> All Enrolled Students</h3>
+    }
+    <table border="1">
+    <tr>
+            <th> Student ID</th>
+            <th> Student Name</th>
+    </tr>
+    @foreach(var student in Model)
+        {
+            <tr>
+            <td>@student.StudentId</td>
+            <td>@student.StudentName</td>
+            </tr>
+        }
+
+    
+    </table>
+}
+<p><a asp-controller="Course" asp-action="AllCourse">
+    Back to Course List
+</a></p>

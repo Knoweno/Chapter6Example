@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Chapter6Example1.Models.Student>
+
+
+<p> <a asp-action="AddStudent">Add Student</a> </p>
+
+@{
+    if (Model.Count() < 1)
+    {
+        <p>No Student in database yet.</p>
+    }
+    else
+    {
+        <h3>All Students</h3>
+        <table border="1">
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+            </tr>
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>@student.StudentId</td>
+                    <td>@student.StudentName</td>
+                </tr>
+            }
+        </table>
+    }
+}

@@ -1,0 +1,9 @@
+﻿@model Chapter6Example1.Models.Student
+
+<form asp-controller="Student" asp-action="AddStudent"
+      method="post">
+    <label asp-for="StudentName"></label>
+    <input asp-for="StudentName" />
+    <br />
+    <button type="submit"> Add Instructor </button>
+</form>

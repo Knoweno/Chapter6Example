@@ -30,6 +30,11 @@ namespace Chapter6Example1.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("AllInstructor");
         }
+        public async Task <IActionResult> InstructorDetails(int? id)
+        {
+            var instructor = await db.Instructors.SingleOrDefaultAsync(i => i.InstructorId == id);
+            return View(instructor);
+        }
     }
 }
 

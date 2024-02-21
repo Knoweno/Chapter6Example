@@ -7,5 +7,6 @@
         public int seatCapacity { get; set; }
         public Instructor Instructor { get; set; }
 
+        public ICollection<Enrollment> Enrollments { get;}
     }
 }

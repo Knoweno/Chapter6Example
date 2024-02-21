@@ -20,10 +20,19 @@
             @foreach (var course in Model)
             {
                 <tr>
-                    <td>@course.CourseID</td>
+                    <td><a asp-controller="Student" asp-action="EnrollCourse"
+                           asp-route-id="@course.CourseID">
+                            @course.CourseID
+                        </a>
+                    </td>
                     <td>@course.CourseTitle</td>
-                    <td>@course.seatCapacity</td>
-                    <td>@course.Instructor.InstructorName</td>
+                    <td><a asp-controller="Student" asp-action="AllClassmate" asp-route-id="@course.CourseID">
+                    @course.seatCapacity</a>
+                    </td>  
+                    <td><a asp-controller="Instructor" asp-action="InstuctorDetails" asp-route-id="@course.Instructor.InstructorId">
+                            @course.Instructor.InstructorName
+                        </a>
+                    </td>
                 </tr>
             }
         </table>
